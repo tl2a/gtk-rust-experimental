@@ -1,0 +1,4 @@
+data/com.firstApp.experimental.desktop.in
+data/com.firstApp.experimental.metainfo.xml.in
+data/com.firstApp.experimental.gschema.xml
+src/window.ui

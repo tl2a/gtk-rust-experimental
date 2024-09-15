@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=experimental
+Exec=experimental
+Icon=com.firstApp.experimental
+Terminal=false
+Type=Application
+Categories=GTK;
+StartupNotify=true

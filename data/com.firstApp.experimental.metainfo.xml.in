@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+	<id>com.firstapp.experimental</id>
+	<name>Experimental</name>
+	<metadata_license>CC0-1.0</metadata_license>
+	<project_license>GPL-3.0-or-later</project_license>
+	<developer id="io.github.tl2a">
+        <name>Arpan</name>
+    </developer>
+	<summary>A fully experimental and starter template</summary>
+	<description>
+	  <p>All MetaInfo files included in build must pass validation using the linter which can also validate the MetaInfo file.</p>
+	  <p>A fully experimental and starter template for gtk development with rust</p>
+	  <p>Run appstreamcli validate from the AppStream project with some Flathub specific checks integrated into it.</p>
+	</description>
+	<url type="homepage">https://github.io/tl2a/gtk-rust-experimental</url>
+	<launchable type="desktop-id">com.firstApp.experimental.desktop</launchable>
+	<content_rating type="oars-1.1" />
+	<releases>
+        <release version="1.0" date="2024-09-16">
+            <description translatable="no">
+                <p>This is the first release of experimental.</p>
+            </description>
+        </release>
+    </releases>
+</component>
