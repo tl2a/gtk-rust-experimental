@@ -99,7 +99,7 @@ impl ExperimentalApplication {
         let window = self.active_window().unwrap();
         let about = adw::AboutWindow::builder()
             .transient_for(&window)
-            .application_name("experimental")
+            .application_name("Experimental")
             .application_icon("com.firstApp.experimental")
             .developer_name("Arpan Biswas")
             .version(VERSION)
