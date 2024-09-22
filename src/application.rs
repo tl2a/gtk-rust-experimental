@@ -86,6 +86,9 @@ impl ExperimentalApplication {
     }
 
     fn setup_gactions(&self) {
+        // let carousel_return_action = gio::ActionEntry::builder("return")
+        //     .activate(move |app: &Self, _, _| app.carousel_return())
+        //     .build();
         let quit_action = gio::ActionEntry::builder("quit")
             .activate(move |app: &Self, _, _| app.quit())
             .build();
@@ -109,4 +112,13 @@ impl ExperimentalApplication {
 
         about.present();
     }
+
+    // fn carousel_return(&self) {
+    //     let re_src = include_str!("../build/src/window.ui");
+    //     let builder = gtk::Builder::from_string(re_src);
+    //     let carousel: Carousel = builder.object("carousel").unwrap();
+    //     let nth_page = carousel.nth_page(0);
+        
+    //     carousel.scroll_to(&nth_page, true);
+    // }
 }

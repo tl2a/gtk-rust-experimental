@@ -2,11 +2,13 @@ using Gtk 4.0;
 using Adw 1;
 
 template $ExperimentalWindow: Adw.ApplicationWindow {
-  default-width: 600;
-  default-height: 300;
+  default-width: 800;
+  default-height: 500;
   title: _("Hello, Blueprint!");
 
   content: Adw.ToolbarView {
+    top-bar-style: flat;
+
     [top]
     Adw.HeaderBar header_bar {
       [end]
@@ -18,13 +20,97 @@ template $ExperimentalWindow: Adw.ApplicationWindow {
       }
     }
 
-    content: Label label {
-      label: "Hello, Blueprint!";
+    Box root_box {
+      orientation: vertical;
+      valign: center;
+      halign: center;
+      spacing: 12;
 
-      styles [
-        "title-1",
-      ]
-    };
+      Adw.Carousel carousel {
+        halign: center;
+        valign: center;
+        allow-long-swipes: true;
+        allow-scroll-wheel: true;
+        spacing: 12;
+
+        Adw.StatusPage {
+          title: _("Carousel");
+          description: _("Swipe or scroll to navigate");
+          icon-name: "applications-science-symbolic";
+
+          LinkButton {
+            label: _("API Reference");
+            uri: "https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.5/class.Carousel.html";
+            margin-top: 12;
+          }
+        }
+
+        Adw.Clamp {
+          maximum-size: 700;
+          halign: center;
+          valign: center;
+
+          Adw.PreferencesGroup {
+            styles [
+              "boxed-list"
+            ]
+
+            Adw.ComboRow orientation_row {
+              title: _("Carousel Orientation");
+
+              model: StringList {
+                strings [
+                  _("Horizontal"),
+                  _("Vertical")
+                ]
+              };
+            }
+
+            Adw.ComboRow indicator_row {
+              title: _("Page Indicators");
+
+              model: StringList {
+                strings [
+                  _("Dots"),
+                  _("Lines")
+                ]
+              };
+            }
+
+            Adw.SwitchRow sw_switch {
+              title: _("Allow Scroll Wheel");
+            }
+
+            Adw.SwitchRow ls_switch {
+              title: _("Allow Long Swipes");
+            }
+          }
+        }
+
+        Adw.StatusPage {
+          title: _("Another Page");
+          hexpand: true;
+
+          Button {
+            label: _("Return to the First Page");
+            can-shrink: true;
+            use-underline: true;
+            halign: center;
+            action-name: "win.return";
+
+            styles [
+              "suggested-action",
+              "pill",
+            ]
+          }
+        }
+
+      }
+      Adw.CarouselIndicatorLines {
+        carousel: carousel;
+        orientation: bind carousel.orientation;
+      }
+    }
   };
 }
 

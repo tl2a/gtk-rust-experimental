@@ -20,7 +20,7 @@
 
 // use gtk::prelude::*;
 use adw::subclass::prelude::*;
-use gtk::{gio, glib};
+use gtk::{gio, glib, prelude::ActionMapExtManual};
 
 mod imp {
     use super::*;
@@ -31,8 +31,10 @@ mod imp {
         // Template widgets
         #[template_child]
         pub header_bar: TemplateChild<adw::HeaderBar>,
-        #[template_child]
-        pub label: TemplateChild<gtk::Label>,
+        #[template_child(id = "carousel")]
+        pub carousel: TemplateChild<adw::Carousel>,
+        // #[template_child]
+        // pub label: TemplateChild<gtk::Label>,
     }
 
     #[glib::object_subclass]
@@ -50,7 +52,13 @@ mod imp {
         }
     }
 
-    impl ObjectImpl for ExperimentalWindow {}
+    impl ObjectImpl for ExperimentalWindow {
+        fn constructed(&self) {
+            self.parent_constructed();
+            let obj = self.obj();
+            obj.setup_gactions();
+        }
+    }
     impl WidgetImpl for ExperimentalWindow {}
     impl WindowImpl for ExperimentalWindow {}
     impl ApplicationWindowImpl for ExperimentalWindow {}
@@ -67,5 +75,19 @@ impl ExperimentalWindow {
         glib::Object::builder()
             .property("application", application)
             .build()
+    }
+
+    fn setup_gactions(&self) {
+        let carousel_return_action = gio::ActionEntry::builder("return")
+            .activate(move |app: &Self, _, _| app.carousel_return())
+            .build();
+        self.add_action_entries([carousel_return_action]);
+    }
+
+    fn carousel_return(&self) {
+        let carousel = &self.imp().carousel;
+        let nth_page = carousel.nth_page(0);
+        
+        carousel.scroll_to(&nth_page, true);
     }
 }
